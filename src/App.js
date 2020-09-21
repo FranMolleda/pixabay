@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "./components/Form";
 import ImageList from "./components/ImagesList";
+
 function App() {
   const [search, setSearch] = useState("");
   const [listimage, setListImage] = useState([]);
@@ -17,13 +18,11 @@ function App() {
       const response = await axios(url);
       setListImage(response.data.hits);
 
-      //Calcular el total de páginas
       const calculateTotalPages = Math.ceil(
         response.data.totalHits / pageImages
       );
       setTotalPages(calculateTotalPages);
 
-      //Mover la pantalla hacía arriba
       const jumbotron = document.querySelector(".jumbotron");
       jumbotron.scrollIntoView({ behavior: "smooth" });
     };
@@ -35,13 +34,12 @@ function App() {
     if (actualpage === 1) return;
     setActualPage(previous);
   };
+
   const handleNextPage = () => {
     const next = actualpage + 1;
     if (next > totalpages) return;
     setActualPage(next);
   };
-
-  console.log(actualpage);
 
   return (
     <div className="containner">
