@@ -5,6 +5,8 @@ import ImageList from "./components/ImagesList";
 function App() {
   const [search, setSearch] = useState("");
   const [listimage, setListImage] = useState([]);
+  const [actualpage, setActualPage] = useState(1);
+  const [totalpages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const ApiConsult = async () => {
@@ -14,6 +16,13 @@ function App() {
       const url = `https://pixabay.com/api/?key=${ApiKey}&q=${search}&per_page=${pageImages}&order="latest"&lang="es"`;
       const response = await axios(url);
       setListImage(response.data.hits);
+      console.log(response.data.totalHits);
+
+      //Calcular el total de páginas
+      const calculateTotalPages = Math.ceil(
+        response.data.totalHits / pageImages
+      );
+      setTotalPages(calculateTotalPages);
     };
     ApiConsult();
   }, [search]);
