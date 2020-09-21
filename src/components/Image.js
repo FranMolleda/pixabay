@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Image = ({ image }) => {
-  //Estraer variables
   const { largeImageURL, likes, previewURL, tags, views } = image;
+
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
       <div className="card">
@@ -24,6 +25,10 @@ const Image = ({ image }) => {
       </div>
     </div>
   );
+};
+
+Image.propTypes = {
+  image: PropTypes.object.isRequired,
 };
 
 export default Image;

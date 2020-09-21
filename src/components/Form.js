@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Error from "./Error";
+import PropTypes from "prop-types";
 
 const Form = ({ setSearch }) => {
   const [word, setWord] = useState("");
@@ -8,7 +9,6 @@ const Form = ({ setSearch }) => {
   const searchImages = (e) => {
     e.preventDefault();
 
-    //Validar
     if (word.trim() === "") {
       setError(true);
       return;
@@ -39,6 +39,10 @@ const Form = ({ setSearch }) => {
       {error ? <Error message="Insert  search term"></Error> : null}
     </form>
   );
+};
+
+Form.propTypes = {
+  setSearch: PropTypes.func.isRequired,
 };
 
 export default Form;
